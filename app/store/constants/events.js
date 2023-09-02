@@ -1,0 +1,3 @@
+export const UPDATE_EVENT_FILTER = "NEW_EVENT_FILTER";
+export const NEW_EVENTSET = "NEW_EVENTSET";
+export const FETCH_EVENTS = "FETCH_EVENTS";
