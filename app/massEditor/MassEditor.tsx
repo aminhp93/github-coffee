@@ -1,7 +1,7 @@
 import Button from "@mui/material/Button";
 import { useCallback, useEffect, useState } from "react";
 import axios from "axios";
-
+import qs from "qs";
 import CheckIcon from "@mui/icons-material/Check";
 import ErrorIcon from "@mui/icons-material/Error";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
@@ -15,23 +15,26 @@ import {
   GridSelectionModel,
 } from "@mui/x-data-grid-pro";
 import { chunk, cloneDeep, uniq, uniqBy } from "lodash";
-import ViewService from "../../../../../@/components/view/View.services";
-import { getViewUrl } from "../../../../../@/components/view/View.utils";
-import CliComs from "../../../../../Core/lib/CliComs";
-import { ColorInput } from "../../../../../lib/components";
-import { Controller, getControllers } from "../../../../../store/api/network";
-import { ItemRequest } from "../../../../items/schema/item.schema";
+// import ViewService from "../../../../../@/components/view/View.services";
+// import { getViewUrl } from "../../../../../@/components/view/View.utils";
+// import CliComs from "../../../../../Core/lib/CliComs";
+// import { ColorInput } from "../../../../../lib/components";
+// import { Controller, getControllers } from "../../../../../store/api/network";
+// import { ItemRequest } from "../../../../items/schema/item.schema";
 import FooterDataGrid from "./FooterDataGrid";
 import { ProcessViewInfo, ProcessViewResponse, ViewInfo } from "./type";
-import i18next from "i18next";
-import { useTranslation } from "react-i18next";
+// import i18next from "i18next";
+// import { useTranslation } from "react-i18next";
+
+type ItemRequest = any;
+type Controller = any;
 
 type Props = { onClose: () => void };
 
 const columns: GridColumns = [
   {
     field: "processViewInfo",
-    headerName: i18next.t("mass_editor.process_view"),
+    headerName: "mass_editor.process_view",
     width: 150,
     editable: false,
     disableColumnMenu: true,
@@ -41,7 +44,7 @@ const columns: GridColumns = [
   },
   {
     field: "controller",
-    headerName: i18next.t("mass_editor.controller"),
+    headerName: "mass_editor.controller",
     width: 120,
     editable: false,
     disableColumnMenu: true,
@@ -51,7 +54,7 @@ const columns: GridColumns = [
   },
   {
     field: "system",
-    headerName: i18next.t("mass_editor.system"),
+    headerName: "mass_editor.system",
     width: 120,
     editable: false,
     disableColumnMenu: true,
@@ -70,7 +73,7 @@ const columns: GridColumns = [
   },
   {
     field: "subsystem",
-    headerName: i18next.t("mass_editor.subsystem"),
+    headerName: "mass_editor.subsystem",
     width: 120,
     editable: false,
     disableColumnMenu: true,
@@ -80,7 +83,7 @@ const columns: GridColumns = [
   },
   {
     field: "viewUuid",
-    headerName: i18next.t("mass_editor.view_uuid"),
+    headerName: "mass_editor.view_uuid",
     width: 120,
     editable: false,
     disableColumnMenu: true,
@@ -90,7 +93,7 @@ const columns: GridColumns = [
   },
   {
     field: "color",
-    headerName: i18next.t("mass_editor.header_font_color"),
+    headerName: "mass_editor.header_font_color",
     flex: 1,
     editable: false,
     disableColumnMenu: true,
@@ -104,7 +107,9 @@ const columns: GridColumns = [
       const uniqueColorList = uniq(colorList);
       if (uniqueColorList) {
         return uniqueColorList.map((i: string) => (
-          <span style={{ marginRight: "4px" }}>{i.toUpperCase()}</span>
+          <span key={i} style={{ marginRight: "4px" }}>
+            {i.toUpperCase()}
+          </span>
         ));
       }
       return null;
@@ -117,13 +122,14 @@ const columns: GridColumns = [
     editable: false,
     disableColumnMenu: true,
     renderCell: (params) => {
-      const viewId = params.row.processViewInfo.uuid;
-      const viewControllerId = params.row.processViewInfo.chainId;
-      const url = getViewUrl({
-        pathname: `/views/${viewId}`,
-        controllerId: viewControllerId,
-        type: "pv",
-      });
+      // const viewId = params.row.processViewInfo.uuid;
+      // const viewControllerId = params.row.processViewInfo.chainId;
+      // const url = getViewUrl({
+      //   pathname: `/views/${viewId}`,
+      //   controllerId: viewControllerId,
+      //   type: "pv",
+      // });
+      const url = "";
       const openInNewTab = () => {
         window.open(url, "_blank", "noopener,noreferrer");
       };
@@ -168,7 +174,6 @@ const columns: GridColumns = [
 ];
 
 const MassEditor = ({ onClose }: Props) => {
-  const { t } = useTranslation();
   const [listController, setListController] = useState<Controller[]>([]);
   const [rows, setRows] = useState<ViewInfo[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -188,14 +193,14 @@ const MassEditor = ({ onClose }: Props) => {
         method: "GET",
         url: "/api/controllers",
       });
-      setListController(controllers);
+      setListController(controllers.data);
     };
     init();
   }, []);
 
-  const handleColorUpdateValueChange = (color: string) => {
-    setColorUpdateValue(color.toUpperCase());
-  };
+  // const handleColorUpdateValueChange = (color: string) => {
+  //   setColorUpdateValue(color.toUpperCase());
+  // };
 
   const getListProcessView = async () => {
     const listPromise: Promise<ProcessViewResponse>[] = [];
@@ -207,12 +212,20 @@ const MassEditor = ({ onClose }: Props) => {
         // 		msgData: { chain: i.id, skipContent: true, skipThumbnail: true },
         // 	},
         // }) as Promise<ProcessViewResponse>
-        axios({
-          method: "GET",
-          url: "/api/processViews",
-          params: {
-            msgData: { chain: i.id, skipContent: true, skipThumbnail: true },
-          },
+        new Promise(async (resolve) => {
+          const res = await axios({
+            method: "GET",
+            url: "/api/processViews",
+            params: {
+              chain: i.id,
+              skipContent: true,
+              skipThumbnail: true,
+            },
+            paramsSerializer: (params) => {
+              return qs.stringify(params);
+            },
+          });
+          resolve(res.data);
         })
       );
     });
@@ -224,12 +237,22 @@ const MassEditor = ({ onClose }: Props) => {
     const listPromise: Promise<ViewInfo>[] = [];
     for (let index = 0; index < listPV.length; index++) {
       const pv = listPV[index];
-      const pvContentPromise = new Promise(async (resolve, reject) => {
-        const res = await ViewService.getPVContent({
-          uuid: pv.uuid,
-          chainId: pv.chainId,
+      const pvContentPromise = new Promise(async (resolve) => {
+        // const res = await ViewService.getPVContent({
+        //   uuid: pv.uuid,
+        //   chainId: pv.chainId,
+        // });
+
+        const res = await axios({
+          method: "GET",
+          url: `/api/processViewContent`,
+          params: {
+            uuid: pv.uuid,
+            chainId: pv.chainId,
+          },
         });
-        resolve({ ...res, processViewInfo: pv });
+
+        resolve({ ...res.data, processViewInfo: pv });
       }) as Promise<ViewInfo>;
       listPromise.push(pvContentPromise);
     }
@@ -264,7 +287,7 @@ const MassEditor = ({ onClose }: Props) => {
           .filter(
             (i: ViewInfo) =>
               i.items &&
-              i.items.filter((j) => j.id === "GK_RoomObject").length > 0
+              i.items.filter((j: any) => j.id === "GK_RoomObject").length > 0
           );
 
         setRows((oldRow) => {
@@ -303,7 +326,7 @@ const MassEditor = ({ onClose }: Props) => {
 
             updatedContent.status && delete updatedContent.status;
 
-            updatedContent.items.forEach((j) => {
+            updatedContent.items.forEach((j: any) => {
               if (j.id === "GK_RoomObject") {
                 j.properties.headerFont.color = colorUpdateValue;
               }
@@ -311,17 +334,26 @@ const MassEditor = ({ onClose }: Props) => {
 
             /** Backend API call which takes the attributes of present view as payload */
             listPromises.push(
-              new Promise(async (resolve, reject) => {
-                const res = (await CliComs.promiseSend({
-                  type: "pv_saveContent",
-                  payload: {
-                    chainId: rowItem.processViewInfo.chainId,
-                    uuid: rowItem.processViewInfo.uuid,
-                    content: updatedContent,
-                    name: rowItem.processViewInfo.name,
-                  },
-                  // timeout: 20000,
-                })) as unknown as boolean;
+              new Promise(async (resolve) => {
+                // const res = (await CliComs.promiseSend({
+                //   type: "pv_saveContent",
+                //   payload: {
+                //     chainId: rowItem.processViewInfo.chainId,
+                //     uuid: rowItem.processViewInfo.uuid,
+                //     content: updatedContent,
+                //     name: rowItem.processViewInfo.name,
+                //   },
+                //   // timeout: 20000,
+                // })) as unknown as boolean;
+
+                // wait 1s
+                await new Promise((resolve) => setTimeout(resolve, 1000));
+                let res = true;
+                // get random number from 0 to 1
+                const random = Math.floor(Math.random() * 2);
+                if (random === 0) {
+                  res = false;
+                }
 
                 if (res === true) {
                   resolve({
@@ -385,6 +417,12 @@ const MassEditor = ({ onClose }: Props) => {
     [rows]
   );
 
+  const handleGetColor = () => {
+    // get random color
+    const randomColor = Math.floor(Math.random() * 16777215).toString(16);
+    setColorUpdateValue(`#${randomColor}`);
+  };
+
   return (
     <DialogContainer>
       <DialogBodyContainer>
@@ -404,7 +442,7 @@ const MassEditor = ({ onClose }: Props) => {
           loadingPosition="start"
           startIcon={<SearchIcon />}
         >
-          <span>{t("mass_editor.search_item")}</span>
+          <span>{"mass_editor.search_item"}</span>
         </LoadingButton>
 
         <Box sx={{ height: 400, width: "100%" }}>
@@ -444,18 +482,20 @@ const MassEditor = ({ onClose }: Props) => {
         >
           <Box sx={{ display: "flex", alignItems: "center" }}>
             <Typography sx={{ fontSize: "14px", marginRight: "4px" }}>
-              {t("mass_editor.update_value")}
+              {"mass_editor.update_value"}
             </Typography>
-            <ColorInput
+            {colorUpdateValue}
+            <Button onClick={handleGetColor}>Get color</Button>
+            {/* <ColorInput
               value={colorUpdateValue}
               compact={true}
               onChange={(color: string) => handleColorUpdateValueChange(color)}
-            />
+            /> */}
           </Box>
 
           <Box sx={{ display: "flex" }}>
             <Button sx={{ color: "rgba(0, 0, 0, 0.6)" }} onClick={onClose}>
-              {t("cancel")}
+              {"cancel"}
             </Button>
             <LoadingButton
               color="primary"
@@ -475,7 +515,7 @@ const MassEditor = ({ onClose }: Props) => {
                 },
               }}
             >
-              {t("update")}
+              {"update"}
             </LoadingButton>
           </Box>
         </Box>

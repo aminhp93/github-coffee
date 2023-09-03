@@ -42,7 +42,7 @@ function SimpleDialog(props: SimpleDialogProps) {
   };
 
   return (
-    <Dialog onClose={handleClose} open={open}>
+    <Dialog fullWidth={true} maxWidth={"lg"} onClose={handleClose} open={open}>
       <DialogTitle>Set backup account</DialogTitle>
       <MassEditor onClose={handleClose} />
     </Dialog>
