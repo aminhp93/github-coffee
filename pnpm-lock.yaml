@@ -35,9 +35,6 @@ dependencies:
   '@octokit/rest':
     specifier: ^20.0.2
     version: 20.0.2
-  '@types/mdx':
-    specifier: ^2.0.11
-    version: 2.0.11
   '@vercel/analytics':
     specifier: ^1.2.0
     version: 1.2.0(next@14.1.0)(react@18.2.0)
@@ -67,6 +64,9 @@ dependencies:
     version: 4.5.1(@types/react@18.2.48)(immer@10.0.3)(react@18.2.0)
 
 devDependencies:
+  '@types/mdx':
+    specifier: ^2.0.11
+    version: 2.0.11
   '@types/node':
     specifier: ^20
     version: 20.11.5
@@ -1008,7 +1008,6 @@ packages:
 
   /@types/mdx@2.0.11:
     resolution: {integrity: sha512-HM5bwOaIQJIQbAYfax35HCKxx7a3KrK3nBtIqJgSOitivTD1y3oW9P3rxY9RkXYPUk7y/AjAohfHKmFpGE79zw==}
-    dev: false
 
   /@types/ms@0.7.34:
     resolution: {integrity: sha512-nG96G3Wp6acyAgJqGasjODb+acrI7KltPiRxzHPXnP3NgI28bpQDRv53olbqGXbfcgF5aiiHmO3xpwEpS5Ld9g==}
