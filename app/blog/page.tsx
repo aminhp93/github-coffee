@@ -12,7 +12,7 @@ const BlogPage = async () => {
       {files.map((file) => {
         return (
           <div key={file}>
-            <Link href={`blog/${file}`}>{file}</Link>
+            <Link href={`/blog/${file}`}>{file}</Link>
           </div>
         );
       })}
