@@ -1,39 +1,30 @@
 "use client";
 
-import {
-  List,
-  ListSubheader,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-  Box,
-} from "@mui/material";
+// Import external libraries
+import { List, ListItemButton, ListItemText, Box } from "@mui/material";
+import { useState, useEffect } from "react";
+import { Octokit } from "@octokit/rest";
 
-import { MoveToInbox } from "@mui/icons-material";
+// Import local files
 import RepoDetail from "./@components/repo-detail";
-import GithubCoffeeProblem1 from "@/content/github-coffee-problem-1.mdx";
-import GithubCoffeeProblem2 from "@/content/github-coffee-problem-2.mdx";
-import GithubCoffeeApi from "@/content/github-coffee-api.mdx";
 import { useRepoStore } from "./store";
 
 const LIST_REPO = [
   {
-    id: 1,
+    name: "github-coffee",
+    viewCount: 100,
+  },
+  {
     name: "github-coffee-problem-1",
-    githubUrl: "aminhp93/github-coffee-problem-1",
-    description: <GithubCoffeeProblem1 />,
+    viewCount: 200,
   },
   {
-    id: 2,
     name: "github-coffee-problem-2",
-    githubUrl: "aminhp93/github-coffee-problem-2",
-    description: <GithubCoffeeProblem2 />,
+    viewCount: 300,
   },
   {
-    id: 3,
     name: "github-coffee-api",
-    githubUrl: "aminhp93/github-coffee-api",
-    description: <GithubCoffeeApi />,
+    viewCount: 400,
   },
 ];
 
@@ -41,10 +32,28 @@ const Home = () => {
   const selectedRepo = useRepoStore((state) => state.selectedRepo);
   const setSelectedRepo = useRepoStore((state) => state.setSelectedRepo);
 
-  console.log(
-    selectedRepo,
-    LIST_REPO.find((i) => i.githubUrl === selectedRepo?.githubUrl)
-  );
+  const [readmeContent, setReadmeContent] = useState("");
+
+  useEffect(() => {
+    const init = async () => {
+      const octokit = new Octokit({
+        auth: process.env.GITHUB_TOKEN,
+      });
+
+      // ref: https://api.github.com/repos/aminhp93/github-coffee
+      const res = await octokit.request("GET /repos/{owner}/{repo}/readme", {
+        owner: "aminhp93",
+        repo: selectedRepo?.name || "",
+        headers: {
+          "X-GitHub-Api-Version": "2022-11-28",
+        },
+      });
+
+      setReadmeContent(res.data.content);
+    };
+
+    init();
+  }, [selectedRepo]);
 
   return (
     <Box
@@ -52,19 +61,27 @@ const Home = () => {
         display: "flex",
       }}
     >
-      <Box sx={{ flex: 1 }}>
+      <Box sx={{ flex: 1, minWidth: "300px" }}>
         <List component="nav" aria-labelledby="nested-list-subheader">
           {LIST_REPO.map((repo) => (
-            <ListItemButton key={repo.id} onClick={() => setSelectedRepo(repo)}>
+            <ListItemButton
+              selected={selectedRepo?.name === repo.name}
+              key={repo.name}
+              onClick={() => setSelectedRepo(repo)}
+            >
               <ListItemText primary={repo.name} />
+              <ListItemText
+                primary={`${repo.viewCount} views`}
+                sx={{
+                  textAlign: "right",
+                }}
+              />
             </ListItemButton>
           ))}
         </List>
       </Box>
       <Box sx={{ flex: 1 }}>
-        <RepoDetail
-          data={LIST_REPO.find((i) => i.githubUrl === selectedRepo?.githubUrl)}
-        />
+        <RepoDetail data={atob(readmeContent)} />
       </Box>
     </Box>
   );

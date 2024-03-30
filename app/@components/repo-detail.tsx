@@ -1,6 +1,8 @@
+import ReactMarkdown from "react-markdown";
+
 const RepoDetail = ({ data }: any) => {
   console.log(data);
-  return data ? data.description : null;
+  return <ReactMarkdown>{data}</ReactMarkdown>;
 };
 
 export default RepoDetail;
