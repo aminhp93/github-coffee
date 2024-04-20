@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const BlogPage = async () => {
   // get all files in /content
-  const files = await fs.readdir(process.cwd() + "/content");
+  const files = await fs.readdir(process.cwd() + "/public/content");
 
   return (
     <div>
