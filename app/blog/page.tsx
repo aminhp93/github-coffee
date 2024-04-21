@@ -1,18 +1,37 @@
-import { promises as fs } from "fs";
-import Link from "next/link";
+"use client";
+import PostService from "@/@core/services/post/Post.service";
+import { Button } from "@mui/material";
 
-const BlogPage = async () => {
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+
+const BlogPage = () => {
   // get all files in /content
-  const files = await fs.readdir(process.cwd() + "/public/content");
+
+  console.log("page blog");
+  const router = useRouter();
+
+  const [files, setFiles] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data } = await PostService.listPost();
+      console.log(data);
+      setFiles(data as any);
+    };
+    fetchData();
+  }, []);
 
   return (
     <div>
+      <Button onClick={() => router.push("/blog/create")}>Create</Button>
       <div>Blog page</div>
       {/* list all files  */}
-      {files.map((file) => {
+      {files.map((file: any) => {
         return (
-          <div key={file}>
-            <Link href={`/blog/${file}`}>{file}</Link>
+          <div key={file.id}>
+            <Link href={`/blog/${file.id}`}>{file.title}</Link>
           </div>
         );
       })}

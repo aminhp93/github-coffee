@@ -6,7 +6,6 @@ import { useState, useEffect } from "react";
 import { Octokit } from "@octokit/rest";
 
 // Import local files
-import RepoDetail from "./@components/repo-detail";
 import { useRepoStore } from "./store";
 import { LIST_REPO } from "./constants";
 
@@ -62,9 +61,6 @@ const Home = () => {
             </ListItemButton>
           ))}
         </List>
-      </Box>
-      <Box sx={{ flex: 1 }}>
-        <RepoDetail data={atob(readmeContent)} />
       </Box>
     </Box>
   );
