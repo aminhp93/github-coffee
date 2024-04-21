@@ -1,8 +1,6 @@
 "use client";
 import PostService from "@/@core/services/post/Post.service";
 import { Button } from "@mui/material";
-
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
@@ -30,8 +28,8 @@ const BlogPage = () => {
       {/* list all files  */}
       {files.map((file: any) => {
         return (
-          <div key={file.id}>
-            <Link href={`/blog/${file.id}`}>{file.title}</Link>
+          <div key={file.id} onClick={() => router.push(`/blog/${file.id}`)}>
+            {file.title}
           </div>
         );
       })}

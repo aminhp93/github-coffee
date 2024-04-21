@@ -1,10 +1,4 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  webpack: {
-    context: {
-      isServer: false,
-    },
-  },
-};
+const nextConfig = {};
 
 export default nextConfig;

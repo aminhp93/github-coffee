@@ -11,7 +11,6 @@ import { Block, BlockNoteEditor, PartialBlock } from "@blocknote/core";
 
 export default function App() {
   // GET ID from url
-  const router = useRouter();
   const params = useParams();
   console.log(params);
   const { id } = params;
