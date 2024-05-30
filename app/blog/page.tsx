@@ -1,39 +1,48 @@
 "use client";
-import PostService from "@/@core/services/post/Post.service";
-import { Button } from "@mui/material";
+// Import libraries
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { CircularProgress, Box, Button, Divider } from "@mui/material";
+
+// Import local files
+import PostService from "@/@core/services/post/Post.service";
 
 const BlogPage = () => {
-  // get all files in /content
-
-  console.log("page blog");
   const router = useRouter();
 
   const [files, setFiles] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const { data } = await PostService.listPost();
-      console.log(data);
-      setFiles(data as any);
-    };
-    fetchData();
+    (async () => {
+      try {
+        setLoading(true);
+        const { data } = await PostService.listPost();
+        setLoading(false);
+        setFiles(data as any);
+      } catch (error) {
+        setLoading(false);
+        console.log(error);
+      }
+    })();
   }, []);
 
   return (
-    <div>
+    <Box>
       <Button onClick={() => router.push("/blog/create")}>Create</Button>
-      <div>Blog page</div>
-      {/* list all files  */}
-      {files.map((file: any) => {
-        return (
-          <div key={file.id} onClick={() => router.push(`/blog/${file.id}`)}>
-            {file.title}
-          </div>
-        );
-      })}
-    </div>
+      {loading ? (
+        <CircularProgress />
+      ) : (
+        files.map((file: any) => {
+          return (
+            <Box key={file.id} onClick={() => router.push(`/blog/${file.id}`)}>
+              {file.id} - {file.title}
+              <Divider />
+            </Box>
+          );
+        })
+      )}
+    </Box>
   );
 };
 
