@@ -5,6 +5,7 @@ import "./globals.css";
 import AppBar from "./AppBar";
 import { Analytics } from "@vercel/analytics/react";
 import { Suspense } from "react";
+import { SnackbarProvider } from "notistack";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,10 +19,12 @@ function RootLayout({
       <body className={inter.className}>
         <AppRouterCacheProvider>
           <Suspense>
-            <AppBar>
-              {children}
-              <Analytics />
-            </AppBar>
+            <SnackbarProvider>
+              <AppBar>
+                {children}
+                <Analytics />
+              </AppBar>
+            </SnackbarProvider>
           </Suspense>
         </AppRouterCacheProvider>
       </body>

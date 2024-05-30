@@ -5,15 +5,15 @@ import "@blocknote/core/fonts/inter.css";
 import { BlockNoteView, useCreateBlockNote } from "@blocknote/react";
 import "@blocknote/react/style.css";
 import { useState } from "react";
-import { Box, Button, TextField } from "@mui/material";
+import { Box, Button, TextField, CircularProgress } from "@mui/material";
 import PostService from "@/@core/services/post/Post.service";
 import { useRouter } from "next/navigation";
+import { enqueueSnackbar } from "notistack";
 
-export default function App() {
-  // Stores the document JSON.
-  const [blocks, setBlocks] = useState<Block[]>([]);
+export default function CreatePage() {
   const [title, setTitle] = useState("title");
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
 
   // Creates a new editor instance.
   const editor = useCreateBlockNote({
@@ -36,33 +36,43 @@ export default function App() {
     ],
   });
 
+  const [blocks, setBlocks] = useState<Block[]>(editor.document);
+
   const handleSave = async () => {
     try {
-      // Saves the document JSON to a database or API.
-      console.log(blocks);
       const requestData = {
         title,
         content: blocks,
         author: "7b23df42-324e-4f19-8f81-14355e7704d9",
       };
-      await PostService.createPost(requestData as any);
+      setLoading(true);
+      const res: any = await PostService.createPost(requestData as any);
+      setLoading(false);
+      enqueueSnackbar("Post created", { variant: "success" });
+      setTimeout(() => {
+        router.push(`/blog/${res.data[0].id}`);
+      });
     } catch (error) {
+      setLoading(false);
+      enqueueSnackbar("Failed to create post", { variant: "error" });
+
       console.log(error);
     }
   };
 
   const handleChangeTitle = (e: any) => {
-    console.log(e.target.value);
     setTitle(e.target.value);
   };
 
-  console.log("page detail");
-
-  // Renders the editor instance and its document JSON.
   return (
     <div className={"wrapper"}>
       <Box>
-        <Button onClick={() => handleSave()}>Save</Button>
+        {loading ? (
+          <CircularProgress />
+        ) : (
+          <Button onClick={() => handleSave()}>Save</Button>
+        )}
+
         <Button onClick={() => router.push("/blog")}>Cancel</Button>
       </Box>
       <div className={"item"}>
@@ -70,7 +80,6 @@ export default function App() {
         <BlockNoteView
           editor={editor}
           onChange={() => {
-            // Saves the document JSON to state.
             setBlocks(editor.document);
           }}
         />
