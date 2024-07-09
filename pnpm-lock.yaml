@@ -47,6 +47,9 @@ dependencies:
   '@vercel/analytics':
     specifier: ^1.2.0
     version: 1.2.0(next@14.1.0)(react@18.2.0)
+  github-coffee-package:
+    specifier: ^0.0.2
+    version: 0.0.2
   immer:
     specifier: ^10.0.3
     version: 10.0.3
@@ -2855,6 +2858,10 @@ packages:
     dependencies:
       resolve-pkg-maps: 1.0.0
     dev: true
+
+  /github-coffee-package@0.0.2:
+    resolution: {integrity: sha512-UzrwQiKcQXdXEQUzVCNbaHvxmvSbcndwhCC0rF3hPkbwdRCWJf61QWkqB7kTESGmTJp8Bt6nOCUTDKzXfDkTUQ==}
+    dev: false
 
   /glob-parent@5.1.2:
     resolution: {integrity: sha512-AOIgSQCepiJYwP3ARnGx+5VnTu2HBYdzbGP45eLw1vr3zB3vZLeyed1sC9hnbcOc9/SrMyM5RPQrkGz4aS9Zow==}

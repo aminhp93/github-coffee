@@ -8,10 +8,9 @@ import { Octokit } from "@octokit/rest";
 // Import local files
 import { useRepoStore } from "./store";
 import { LIST_REPO } from "./constants";
-import { BlockNoteView } from "@blocknote/react";
 import RepoDetail from "./RepoDetail";
 
-const Home = () => {
+const ListReposPage = () => {
   const selectedRepo = useRepoStore((state) => state.selectedRepo);
   const setSelectedRepo = useRepoStore((state) => state.setSelectedRepo);
   const [readmeContent, setReadmeContent] = useState("");
@@ -74,4 +73,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default ListReposPage;

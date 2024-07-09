@@ -1,6 +1,6 @@
 import dynamic from "next/dynamic";
 
-const AppPage = dynamic(() => import("@/features/index"), {
+const AppPage = dynamic(() => import("@/features/list-repos/ListRepos"), {
   ssr: false,
 });
 
