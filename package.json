@@ -1,25 +1,33 @@
 {
-  "name": "github-coffee",
-  "version": "0.1.0",
-  "private": true,
+  "name": "webpmp-v5",
+  "version": "1.0.24",
+  "private": false,
   "scripts": {
-    "dev": "rm -rf .next &&  NEXT_PRIVATE_LOCAL_WEBPACK=true next dev -p 3000",
-    "build": "NEXT_PRIVATE_LOCAL_WEBPACK=true next build",
+    "dev": "next dev",
+    "build": "next build",
+    "export": "next export",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
-    "@module-federation/nextjs-mf": "^8.4.13",
-    "next": "14.2.7",
-    "react": "^18",
-    "react-dom": "^18"
+    "@module-federation/nextjs-mf": "^8.3.19",
+    "next": "13.3.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "webpack": "^5.89.0"
   },
   "devDependencies": {
-    "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
+    "@types/node": "^20.14.6",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@typescript-eslint/eslint-plugin": "^6.13.2",
+    "@typescript-eslint/parser": "^6.13.2",
+    "autoprefixer": "^10.0.1",
     "eslint": "^8",
-    "eslint-config-next": "14.2.7",
-    "typescript": "^5"
+    "eslint-config-next": "13.3.1",
+    "typescript": "^5.4.5"
+  },
+  "resolutions": {
+    "string-width": "4.2.3"
   }
 }
