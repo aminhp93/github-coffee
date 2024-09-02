@@ -1,5 +1,5 @@
 /** @type {import('next').NextConfig} */
-const NextFederationPlugin = require("@module-federation/nextjs-mf");
+import NextFederationPlugin from "@module-federation/nextjs-mf";
 // const { createSharedDependencies } = require("./@core/configs/nextConfigUtil");
 
 const nextConfig = {
@@ -24,14 +24,6 @@ const nextConfig = {
   eslint: {
     dirs: ["."], //or ['pages', 'hooks']
   },
-  modularizeImports: {
-    "@mui/icons-material/?(((\\w*)?/?)*)": {
-      transform: "@mui/icons-material/{{ matches.[1] }}/{{member}}",
-    },
-  },
-  experimental: {
-    esmExternals: "loose",
-  },
 };
 
-module.exports = nextConfig;
+export default nextConfig;

@@ -3,28 +3,28 @@
   "version": "1.0.24",
   "private": false,
   "scripts": {
-    "dev": "next dev",
+    "dev": "rm -rf .next &&  NEXT_PRIVATE_LOCAL_WEBPACK=true next dev -p 3000",
     "build": "next build",
     "export": "next export",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
-    "@module-federation/nextjs-mf": "^8.3.19",
-    "next": "13.3.1",
+    "@module-federation/nextjs-mf": "^8.4.13",
+    "next": "14.2.7",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "webpack": "^5.89.0"
+    "webpack": "^5.94.0"
   },
   "devDependencies": {
     "@types/node": "^20.14.6",
-    "@types/react": "^18.3.3",
+    "@types/react": "^18.3.5",
     "@types/react-dom": "^18.3.0",
     "@typescript-eslint/eslint-plugin": "^6.13.2",
     "@typescript-eslint/parser": "^6.13.2",
     "autoprefixer": "^10.0.1",
     "eslint": "^8",
-    "eslint-config-next": "13.3.1",
+    "eslint-config-next": "14.2.7",
     "typescript": "^5.4.5"
   },
   "resolutions": {
