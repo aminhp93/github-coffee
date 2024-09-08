@@ -25,5 +25,3 @@ This project follows structure of [Next.js](https://nextjs.org/docs/getting-star
 ```bash
 yarn component
 ```
-
-# Hello 123
