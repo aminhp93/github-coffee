@@ -28,6 +28,7 @@
     "eslint": "^8",
     "eslint-config-next": "14.2.7",
     "husky": "^9.1.5",
+    "jira-prepare-commit-msg": "^1.7.2",
     "lint-staged": "^15.2.10",
     "prettier": "^3.3.3",
     "typescript": "^5.4.5"
