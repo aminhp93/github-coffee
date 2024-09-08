@@ -23,14 +23,14 @@ const RemoteModuleConfigObj: {
     module: {
       index: "./index",
     },
-    hostName: "https://github-coffee.vercel.app/",
+    hostName: "https://github-coffee.vercel.app",
   },
   "github-coffee-blog": {
     port: 3001,
     module: {
       index: "./index",
     },
-    hostName: "https://aminhp93.vercel.app/",
+    hostName: "https://aminhp93.vercel.app",
   },
 };
 
