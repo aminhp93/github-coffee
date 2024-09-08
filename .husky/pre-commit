@@ -1,5 +1,6 @@
-npx jira-prepare-commit-msg 
-npx lint-staged
+#!/bin/bash
+
+next lint
 
 
 
