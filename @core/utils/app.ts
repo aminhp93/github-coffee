@@ -12,7 +12,9 @@ interface RemoteModuleConfig extends RemoteModule {
 
 const isServer = typeof window === "undefined";
 
-const HOST_NAME = !isServer ? window.location.protocol + "//" + window.location.hostname : "";
+const HOST_NAME = !isServer
+  ? window.location.protocol + "//" + window.location.hostname
+  : "";
 
 const RemoteModuleConfigObj: {
   [key: string]: Omit<RemoteModuleConfig, "remoteModule" | "url" | "baseUrl">;
@@ -86,7 +88,11 @@ function getBaseUrlAndPort() {
   return "/";
 }
 
-function createRemoteModule(port: number, scope: string, module: Record<string, string>) {
+function createRemoteModule(
+  port: number,
+  scope: string,
+  module: Record<string, string>,
+) {
   return {
     url: getUrl(HOST_NAME, port),
     baseUrl: getBaseUrl(HOST_NAME, port),

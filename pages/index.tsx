@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 const HomePage = () => {
+  console.log("123");
   return (
     <div>
       Home page
