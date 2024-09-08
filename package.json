@@ -26,11 +26,9 @@
     "@types/react-dom": "^18.3.0",
     "@typescript-eslint/eslint-plugin": "^6.13.2",
     "@typescript-eslint/parser": "^6.13.2",
-    "autoprefixer": "^10.0.1",
     "eslint": "^8",
     "eslint-config-next": "14.2.7",
     "husky": "^9.1.5",
-    "jira-prepare-commit-msg": "^1.7.2",
     "lint-staged": "^15.2.10",
     "prettier": "^3.3.3",
     "typescript": "^5.4.5"
@@ -40,8 +38,5 @@
       "prettier --write",
       "eslint --fix"
     ]
-  },
-  "resolutions": {
-    "string-width": "4.2.3"
   }
 }
