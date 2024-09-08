@@ -33,6 +33,12 @@
     "prettier": "^3.3.3",
     "typescript": "^5.4.5"
   },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,json,css,md}": [
+      "prettier --write",
+      "eslint --fix"
+    ]
+  },
   "resolutions": {
     "string-width": "4.2.3"
   }
