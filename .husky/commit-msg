@@ -1,0 +1,12 @@
+# Read the commit message
+message="$(cat $1)"
+
+# Define the required pattern
+requiredPattern="^\[[a-zA-Z0-9]+\] (add|cut|fix|bump|make|start|stop|refactor|reformat|optimise|document|merge) .*$"
+
+# Check if the commit message matches the pattern
+if ! [[ $message =~ $requiredPattern ]]; then
+  echo "Error: Commit message does not match the required pattern."
+  echo "Pattern: [commit-id] (add|cut|fix|bump|make|start|stop|refactor|reformat|optimise|document|merge) <message>"
+  exit 1
+fi
