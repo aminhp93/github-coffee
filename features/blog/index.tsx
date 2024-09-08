@@ -14,9 +14,9 @@ const Blog = () => {
   useEffect(() => {
     (async () => {
       const { url, scope, module } =
-        AppConfig.remoteModuleConfig.pvItems.remoteModule;
+        AppConfig.remoteModule["github-coffee-blog"];
       setLoading(true);
-      const res = await loadRemoteModule(url, scope, module.view);
+      const res = await loadRemoteModule(url, scope, module.index);
       setLoading(false);
       setRemoteComponent(() => res as ComponentType);
     })();

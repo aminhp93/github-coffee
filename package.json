@@ -1,9 +1,9 @@
 {
-  "name": "webpmp-v5",
-  "version": "1.0.24",
+  "name": "github-coffee",
+  "version": "0.0.1",
   "private": false,
   "scripts": {
-    "dev": "rm -rf .next &&  NEXT_PRIVATE_LOCAL_WEBPACK=true next dev -p 3000",
+    "dev": "rm -rf .next && NEXT_PRIVATE_LOCAL_WEBPACK=true next dev -p 3000",
     "build": "next build",
     "export": "next export",
     "start": "next start",
