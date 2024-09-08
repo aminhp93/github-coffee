@@ -1,3 +1,6 @@
+npx jira-prepare-commit-msg 
 npx lint-staged
+
+
 
 
