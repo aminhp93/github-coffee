@@ -15,7 +15,7 @@ const nextConfig = {
             "./index": "./pages/index.tsx",
           },
           // shared: createSharedDependencies(),
-        }),
+        })
       );
     }
 

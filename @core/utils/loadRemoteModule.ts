@@ -8,7 +8,7 @@ type RemoteModule = {
 export const loadRemoteModule = async (
   url: string,
   scope: string,
-  module: string,
+  module: string
 ): Promise<ComponentType | null> => {
   try {
     const remoteModule = await importRemote({

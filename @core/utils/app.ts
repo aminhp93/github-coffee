@@ -91,7 +91,7 @@ function getBaseUrlAndPort() {
 function createRemoteModule(
   port: number,
   scope: string,
-  module: Record<string, string>,
+  module: Record<string, string>
 ) {
   return {
     url: getUrl(HOST_NAME, port),

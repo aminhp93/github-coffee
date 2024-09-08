@@ -8,7 +8,9 @@
     "export": "next export",
     "start": "next start",
     "lint": "next lint",
-    "prepare": "husky"
+    "prepare": "husky",
+    "prettier-fix": "prettier --write .",
+    "prettier-check": "prettier --check ."
   },
   "dependencies": {
     "@module-federation/nextjs-mf": "^8.4.13",

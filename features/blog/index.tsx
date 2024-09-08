@@ -8,7 +8,7 @@ import AppConfig from "@/@core/utils/app";
 const Blog = () => {
   const [loading, setLoading] = useState(false);
   const [RemoteComponent, setRemoteComponent] = useState<ComponentType | null>(
-    null,
+    null
   );
 
   useEffect(() => {
