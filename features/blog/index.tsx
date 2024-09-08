@@ -1,12 +1,11 @@
 // Import libraries
 import { useEffect, useState, ComponentType } from "react";
 
-import { loadRemoteModule } from "./loadRemoteModule";
-import AppConfig from "./app";
-
 // Import local files
+import { loadRemoteModule } from "@/@core/utils/loadRemoteModule";
+import AppConfig from "@/@core/utils/app";
 
-const ViewDetail = () => {
+const Blog = () => {
   const [loading, setLoading] = useState(false);
   const [RemoteComponent, setRemoteComponent] = useState<ComponentType | null>(
     null
@@ -30,4 +29,4 @@ const ViewDetail = () => {
   );
 };
 
-export default ViewDetail;
+export default Blog;

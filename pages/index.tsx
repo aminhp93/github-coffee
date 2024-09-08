@@ -1,11 +1,22 @@
-import dynamic from "next/dynamic";
-
-const ViewDetail = dynamic(() => import("@/features/view"), {
-  ssr: false,
-});
+import Link from "next/link";
 
 const HomePage = () => {
-  return <ViewDetail />;
+  return (
+    <div>
+      Home page
+      <ul>
+        <li>
+          <Link href="/">home</Link>
+        </li>
+        <li>
+          <Link href="/blog">blog</Link>
+        </li>
+        <li>
+          <Link href="/stock">stock</Link>
+        </li>
+      </ul>
+    </div>
+  );
 };
 
 export default HomePage;
