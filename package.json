@@ -7,7 +7,8 @@
     "build": "next build",
     "export": "next export",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prepare": "husky"
   },
   "dependencies": {
     "@module-federation/nextjs-mf": "^8.4.13",
@@ -27,6 +28,8 @@
     "eslint": "^8",
     "eslint-config-next": "14.2.7",
     "husky": "^9.1.5",
+    "lint-staged": "^15.2.10",
+    "prettier": "^3.3.3",
     "typescript": "^5.4.5"
   },
   "resolutions": {
