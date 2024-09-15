@@ -5,29 +5,24 @@ import "@/styles/globals.css";
 import type { NextPage } from "next";
 import type { AppProps } from "next/app";
 
-import { ReactElement, ReactNode } from "react";
+import dynamic from "next/dynamic";
 
-export type NextPageWithLayout<P = object, IP = P> = NextPage<P, IP> & {
-  getLayout?: (page: ReactElement) => ReactNode;
-  authGuard?: boolean;
-  guestGuard?: boolean;
-  setConfig?: () => void;
-};
+// dynamic import for layout
+const Layout = dynamic(() => import("./_layout"), {
+  ssr: false,
+});
 
-type Props = AppProps & {
-  Component: NextPageWithLayout;
-  getLayout?: (page: ReactElement) => ReactNode;
-  authGuard?: boolean;
-  guestGuard?: boolean;
-  setConfig?: () => void;
-};
-
-const App = (props: Props) => {
+const App = (props: {
+  Component: NextPage;
+  pageProps: AppProps["pageProps"];
+}) => {
   const { Component, pageProps } = props;
 
-  const getLayout = Component.getLayout ?? ((page) => page);
-
-  return getLayout(<Component {...pageProps} />);
+  return (
+    <Layout>
+      <Component {...pageProps} />
+    </Layout>
+  );
 };
 
 export default App;
