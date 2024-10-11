@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 import NextFederationPlugin from "@module-federation/nextjs-mf";
 // const { createSharedDependencies } = require("./@core/configs/nextConfigUtil");
+import createMDX from "@next/mdx";
 
 const nextConfig = {
   // reactStrictMode: true,
@@ -18,12 +19,15 @@ const nextConfig = {
         })
       );
     }
-
     return config;
   },
   eslint: {
     dirs: ["."], //or ['pages', 'hooks']
   },
+  pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
 };
+const withMDX = createMDX({
+  // Add markdown plugins here, as desired
+});
 
-export default nextConfig;
+export default withMDX(nextConfig);
