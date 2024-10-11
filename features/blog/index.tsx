@@ -13,18 +13,27 @@ const Blog = () => {
 
   useEffect(() => {
     (async () => {
-      const { url, scope, module } =
-        AppConfig.remoteModule["github-coffee-blog"];
-      setLoading(true);
-      const res = await loadRemoteModule(url, scope, module.index);
-      setLoading(false);
-      setRemoteComponent(() => res as ComponentType);
+      try {
+        const { url, scope, module } =
+          AppConfig.remoteModule["github-coffee-blog"];
+        setLoading(true);
+        const res = await loadRemoteModule(url, scope, module.index);
+        setLoading(false);
+        setRemoteComponent(() => res as ComponentType);
+      } catch (error) {
+        // console.error(error);
+      }
     })();
   }, []);
 
   return (
     <div>
-      {loading ? <div>Loading</div> : RemoteComponent && <RemoteComponent />}
+      {loading ? <div>Loading</div> : null}
+      {RemoteComponent ? (
+        <RemoteComponent />
+      ) : (
+        <div>github-coffee-blog RemoteComponent Error</div>
+      )}
     </div>
   );
 };
