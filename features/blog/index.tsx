@@ -1,38 +1,45 @@
 // Import libraries
-import { useEffect, useState, ComponentType } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import Markdown from "react-markdown";
 
-// Import local files
-import { loadRemoteModule } from "@/@core/utils/loadRemoteModule";
-import AppConfig from "@/@core/utils/app";
+interface MdxFile {
+  filename: string;
+  content: string;
+  id: number;
+}
 
 const Blog = () => {
-  const [loading, setLoading] = useState(false);
-  const [RemoteComponent, setRemoteComponent] = useState<ComponentType | null>(
-    null
-  );
+  const [mdxFiles, setMdxFiles] = useState<MdxFile[]>([]);
+  const [selectedMdx, setSelectedMdx] = useState<number | null>(null);
 
   useEffect(() => {
-    (async () => {
-      try {
-        const { url, scope, module } =
-          AppConfig.remoteModule["github-coffee-blog"];
-        setLoading(true);
-        const res = await loadRemoteModule(url, scope, module.index);
-        setLoading(false);
-        setRemoteComponent(() => res as ComponentType);
-      } catch (error) {
-        // console.error(error);
-      }
-    })();
+    const init = async () => {
+      const res = await axios.get("/api/blog/docs");
+      setMdxFiles(res.data);
+    };
+    init();
   }, []);
 
   return (
     <div>
-      {loading ? <div>Loading</div> : null}
-      {RemoteComponent ? (
-        <RemoteComponent />
+      {selectedMdx !== null ? (
+        <>
+          <div onClick={() => setSelectedMdx(null)}>Back</div>
+          <div>
+            <Markdown>
+              {mdxFiles.filter((i) => i.id === selectedMdx)[0].content ?? ""}
+            </Markdown>
+          </div>
+        </>
       ) : (
-        <div>github-coffee-blog RemoteComponent Error</div>
+        <ul>
+          {mdxFiles.map((file) => (
+            <li key={file.filename} onClick={() => setSelectedMdx(file.id)}>
+              <h2>{file.filename}</h2>
+            </li>
+          ))}
+        </ul>
       )}
     </div>
   );

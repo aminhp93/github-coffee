@@ -9,16 +9,16 @@ import { Responsive, WidthProvider } from "react-grid-layout";
 import { v4 as uuidv4 } from "uuid";
 
 // Import local files
-import useDashboardStore from "./Dashboard.store";
+import useDashboardStore from "./store";
 import {
   Widget,
   WidgetId,
   Dashboard as DashboardModel,
   WidgetType,
-} from "./Dashboard.types";
+} from "./types";
 import GridItem from "./GridItem";
-import { getWidgetComponent } from "./Dashboard.utils";
-import { DashboardLayout } from "./DashboardLayout";
+import { getWidgetComponent } from "./utils";
+import { DashboardLayout } from "./Layout";
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
@@ -157,9 +157,9 @@ const Dashboard = () => {
         <ResponsiveReactGridLayout
           // className="layout"
           layouts={layouts}
-          isResizable
+          isResizable={false}
           onLayoutChange={handleLayoutChange}
-          // isDraggable={editMode}
+          isDraggable={false}
           // draggableHandle=".drag-handle"
           breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
           // resizeHandles={["se", "ne", "nw", "sw"]}
