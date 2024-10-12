@@ -14,11 +14,12 @@ const GridItem = ({ children, ...props }: Props) => {
   );
 };
 
-const Container = styled(Box)(({ theme }) => ({
+const Container = styled(Box)(() => ({
   width: "100%",
   height: "100%",
-  backgroundColor: theme.palette.primary.main,
-  color: theme.palette.primary.contrastText,
+  // backgroundColor: theme.palette.primary.main,
+  backgroundColor: "lightgray",
+  // color: theme.palette.primary.contrastText,
   overflow: "hidden",
   borderRadius: "6px",
 }));

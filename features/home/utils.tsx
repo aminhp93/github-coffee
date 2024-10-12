@@ -1,9 +1,9 @@
 import { v4 as uuidv4 } from "uuid";
-import { Widget, WidgetType } from "./Dashboard.types";
+import { Widget, WidgetType } from "./types";
 import _ from "lodash";
 import Blog from "../blog";
 import Stock from "../stock";
-import News from "../news/News";
+import News from "../news";
 
 export const generateComponentKey = (componentKey: string) => {
   return uuidv4() + "__" + componentKey;

@@ -1,6 +1,6 @@
 import { produce } from "immer";
 import { create } from "zustand";
-import { Dashboard } from "./Dashboard.types";
+import { Dashboard } from "./types";
 
 type DashboardStore = {
   dashboards: Dashboard[] | undefined;
