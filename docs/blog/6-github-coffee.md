@@ -1,3 +1,9 @@
+---
+id: 6
+title: "Github Coffee"
+category: "Docs"
+---
+
 ## List repos
 
 - github-coffee

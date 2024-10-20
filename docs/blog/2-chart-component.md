@@ -1,3 +1,9 @@
+---
+id: 2
+title: "Chart"
+category: "Core"
+---
+
 ## About
 
 - Wrapper for the `chart` element.

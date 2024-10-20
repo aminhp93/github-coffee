@@ -1,3 +1,9 @@
+---
+id: 10
+title: "Table"
+category: "Core"
+---
+
 ## About
 
 - Wrapper for the `table` element.

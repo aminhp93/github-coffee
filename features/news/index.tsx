@@ -1,12 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Markdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import { MdxFile } from "@/@core/utils/markdown";
 
-interface MdxFile {
-  filename: string;
-  content: string;
-  id: number;
-}
 const News = () => {
   const [mdxFiles, setMdxFiles] = useState<MdxFile[]>([]);
 
@@ -21,7 +18,9 @@ const News = () => {
   return (
     <div>
       News
-      <Markdown>{mdxFiles[0]?.content ?? ""}</Markdown>
+      <Markdown remarkPlugins={[remarkGfm]}>
+        {mdxFiles[0]?.content ?? ""}
+      </Markdown>
     </div>
   );
 };

@@ -1,3 +1,9 @@
+---
+id: 4
+title: "Dynamic svg"
+category: "Core"
+---
+
 ## About
 
 - Need a way to load svg image dynamically with customzied logic. Dont have to update code manually
