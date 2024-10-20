@@ -1,3 +1,9 @@
+---
+id: 1
+title: "News"
+category: "Core"
+---
+
 ## About
 
 - Place to update news from dev.to and stock news

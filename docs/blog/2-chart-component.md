@@ -1,0 +1,17 @@
+---
+id: 2
+title: "Chart"
+category: "Core"
+---
+
+## About
+
+- Wrapper for the `chart` element.
+
+## Feature
+
+- Switch chart type (line, bar)
+- Mulptiple yAxis with different scale/unit
+- Table with corresponding data when hovering in chart
+- Resizable table data
+- Zoom/pan chart with time range

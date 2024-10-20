@@ -1,0 +1,28 @@
+---
+id: 6
+title: "Github Coffee"
+category: "Docs"
+---
+
+## List repos
+
+- github-coffee
+  - Dashboard content for daily use
+  - News + Blog
+- github-coffee-api
+  - List all testing api (fireant, dev.to, github, youtube, supabase, etc)
+- github-coffee-old [deprecated]
+- github-coffee-stock
+
+  - Base info of stock market (stock price, etc)
+  - Stock news
+  - Tool to analyze stock
+
+- github-coffee-reading
+  - No implement yet
+  - List of all reading of all sources (medium, github, dev.to, etc). Track all the read one and improve the filter content
+  - Consider to merge with news in github-coffee
+- github-coffee-package
+  - Include all shared common code
+- github-coffee-template
+  - All repos are initialized from here

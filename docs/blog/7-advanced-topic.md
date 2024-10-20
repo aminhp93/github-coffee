@@ -1,0 +1,13 @@
+---
+id: 7
+title: "Advanced react"
+category: "Core"
+---
+
+## Microfrontend
+
+- Using microfrontend to load multiple react app in one page
+- Load run time for deploy with dynamic domain (using multiple port)
+- All shared logic and components are moved to shared library
+
+## zustand with react-context
