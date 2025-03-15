@@ -1,20 +1,20 @@
-* {
-  margin: 0;
-  padding: 0;
+@import "tailwindcss";
+
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
 }
 
-html,
-body,
-#root {
-  height: 100%;
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
 }
 
-ul {
-  list-style: none;
-}
-
-.MuiFormLabel-root.MuiInputLabel-root,
-.MuiDataGrid-columnHeaders .MuiDataGrid-columnHeaderTitle,
-.MuiButtonBase-root.MuiMenuItem-root {
-  text-transform: capitalize;
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
 }
