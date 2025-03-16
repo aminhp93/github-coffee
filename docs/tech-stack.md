@@ -10,3 +10,13 @@
 | 🧪 Testing      | Cypress, Storybook | E2E tests + Component-driven development                                                                                                                                                   |
 | ✅ Code Quality | ESLint, Prettier   | Linting and formatting                                                                                                                                                                     |
 | 🚀 CI/CD        | Vercel             | Auto deploy & CI/CD for Next.js app                                                                                                                                                        |
+
+## 📦 **Package Selection**
+
+| 🔧 **Category**        | 🚀 **Technology** | 📝 **Notes**                                     | 🏷️ **Version** |
+| ---------------------- | ----------------- | ------------------------------------------------ | -------------- |
+| 📦 **Package Manager** | **pnpm**          | [Details](./blogs/package-manager-evaluation.md) | `8.x`          |
+| 📋 **Table/Grid**      | **AG Grid**       | [Details](./blogs/table-evaluation.md)           | `31.x`         |
+| 📊 **Charting**        | **Highcharts**    | [Details](./blogs/chart-evaluation.md)           | `11.x`         |
+| ✏️ **Text Editor**     | **Lexical**       | No notes                                         | `0.12.x`       |
+| 🖊️ **Code Editor**     | **VS Code**       | No notes                                         |
