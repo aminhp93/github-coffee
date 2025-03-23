@@ -15,9 +15,11 @@
     "@emotion/styled": "^11.14.0",
     "@mui/material": "^6.4.5",
     "axios": "^1.7.9",
+    "gray-matter": "^4.0.3",
     "next": "15.1.7",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-markdown": "^10.1.0"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^3.2.5",
