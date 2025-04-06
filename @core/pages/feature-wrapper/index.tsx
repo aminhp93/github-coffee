@@ -46,4 +46,4 @@ const FeatureWrapper = ({
   );
 };
 
-export default FeatureWrapper;
+export { FeatureWrapper };
