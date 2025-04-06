@@ -4,13 +4,14 @@
   "private": true,
   "scripts": {
     "analyze": "ANALYZE=true next build",
-    "build": "next build",
+    "build": "pnpm prebuild && next build",
     "build-storybook": "rimraf public/storybook-static && storybook build --output-dir public/storybook-static",
     "check-eslint-disable": "./scripts/check-eslint-disable.sh",
     "dev": "next dev",
-    "lint": "next lint && pnpm check-eslint-disable",
+    "lint": "next lint",
     "prettier-fix": "prettier --write .",
     "prettier-check": "prettier --check .",
+    "prebuild": "pnpm test && pnpm check-eslint-disable",
     "start": "next start",
     "storybook": "storybook dev -p 6006",
     "test": "vitest --run",
@@ -30,7 +31,8 @@
     "next": "15.1.7",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-markdown": "^10.1.0"
+    "react-markdown": "^10.1.0",
+    "uuid": "^11.1.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.2.0",
