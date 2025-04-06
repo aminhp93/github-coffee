@@ -1,1 +1,1 @@
-export const theme = "theme";
+export { styled, useTheme } from "@mui/material/styles";
