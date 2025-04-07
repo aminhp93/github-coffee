@@ -1,7 +1,6 @@
 ---
 title: 5. Editor (figma/roadmap clone)
 description: Demo of current webpmp editor
-link: /editor
 keywords: []
 ready: ❌
 ---

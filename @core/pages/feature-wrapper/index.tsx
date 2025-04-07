@@ -17,7 +17,6 @@ const FeatureWrapper = ({
   const [meta, setMeta] = useState<{
     title?: string;
     description?: string;
-    link?: string;
   }>({});
 
   const toggleDrawer = (newOpen: boolean) => () => {
@@ -29,6 +28,7 @@ const FeatureWrapper = ({
       .then((res) => res.text())
       .then((raw) => {
         const { data, content: mdContent } = matter(raw);
+
         setMeta(data);
         setContent(mdContent);
       });
@@ -43,7 +43,7 @@ const FeatureWrapper = ({
 
         <Markdown>{content}</Markdown>
         <Link
-          href={`https://github.com/aminhp93/github-coffee/edit/main/public/docs/features/${meta.link}.md`}
+          href={`https://github.com/aminhp93/github-coffee/edit/main/public/docs/features/${featureName}.md`}
           target="_blank"
           rel="noopener noreferrer"
           style={{

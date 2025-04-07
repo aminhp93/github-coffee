@@ -3,7 +3,6 @@ title: 1. Check npm package
 description:
   - Goal: Check if the new version is updated within a week/month in the list of subscribed packages
   - Get the latest 2 official versions using the npm API
-link: /check-npm-package
 keywords: [npm, package, version, check]
 ready: ✅
 ---
