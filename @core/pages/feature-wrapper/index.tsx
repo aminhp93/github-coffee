@@ -40,7 +40,7 @@ const FeatureWrapper = ({
       {children}
       <Drawer open={open} onClose={toggleDrawer(false)}>
         <h1>{meta.title}</h1>
-        <p>{meta.description}</p>
+
         <Markdown>{content}</Markdown>
         <Link
           href={`https://github.com/aminhp93/github-coffee/edit/main/public/docs/features/${meta.link}.md`}

@@ -18,7 +18,7 @@ const FeatureWrapper = dynamic(
 
 export default function CheckNpmPackagePage() {
   return (
-    <FeatureWrapper featureName="check-npm-package">
+    <FeatureWrapper featureName="1-check-npm-package">
       <CheckNpmPackage />;
     </FeatureWrapper>
   );

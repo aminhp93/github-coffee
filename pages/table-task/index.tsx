@@ -18,7 +18,7 @@ const FeatureWrapper = dynamic(
 
 export default function TableTaskPage() {
   return (
-    <FeatureWrapper featureName="table-task">
+    <FeatureWrapper featureName="2-table-task">
       <TableTask />;
     </FeatureWrapper>
   );

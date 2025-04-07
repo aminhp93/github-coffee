@@ -18,7 +18,7 @@ const FeatureWrapper = dynamic(
 
 export default function EvaluationPage() {
   return (
-    <FeatureWrapper featureName="evaluation">
+    <FeatureWrapper featureName="3-evaluation">
       <Evaluation />;
     </FeatureWrapper>
   );
