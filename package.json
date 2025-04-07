@@ -4,17 +4,20 @@
   "private": true,
   "scripts": {
     "analyze": "ANALYZE=true next build",
-    "build": "pnpm prebuild && next build",
-    "build-storybook": "rimraf public/storybook-static && storybook build --output-dir public/storybook-static",
+    "build": "pnpm prepare && next build",
+    "build:storybook": "rimraf public/storybook-static && storybook build --output-dir public/storybook-static",
+    "build:feature-list": "node ./scripts/build-feature-list.js",
     "check-eslint-disable": "./scripts/check-eslint-disable.sh",
     "dev": "next dev",
     "lint": "next lint",
+    "lint:fix": "eslint --fix .",
     "prettier-fix": "prettier --write .",
     "prettier-check": "prettier --check .",
-    "prebuild": "pnpm test && pnpm check-eslint-disable",
+    "prepare": "pnpm test && pnpm check-eslint-disable",
     "start": "next start",
     "storybook": "storybook dev -p 6006",
     "test": "vitest --run",
+    "test:watch": "vitest",
     "test:related": "vitest ./tests/unit"
   },
   "dependencies": {
