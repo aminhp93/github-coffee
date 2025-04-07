@@ -5,15 +5,19 @@ link: /table-task
 keywords: [table, task, post, note, custom]
 ---
 
-## Todo
+## Backlog
 
-- List feature of aggrid
-- Save data locally if not database setup
+- Feature Evaluation
+- Package Evaluation
+- Custom Column type/UI
+- Summarize the bug, feature, key notes in real work????
+- Replace by other library
 
 ## In Progress
 
--
+- List features of aggrid
+- Basic CRUD & save data locally
 
-## Completed
+## Shipped
 
 -

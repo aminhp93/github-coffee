@@ -2,6 +2,7 @@ import { ReactNode, useEffect, useState } from "react";
 import { Button, Drawer } from "@mui/material";
 import matter from "gray-matter";
 import Markdown from "react-markdown";
+import Link from "next/link";
 
 const FeatureWrapper = ({
   children,
@@ -41,6 +42,17 @@ const FeatureWrapper = ({
         <h1>{meta.title}</h1>
         <p>{meta.description}</p>
         <Markdown>{content}</Markdown>
+        <Link
+          href={`https://github.com/aminhp93/github-coffee/edit/main/public/docs/features/${meta.link}.md`}
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            position: "absolute",
+            bottom: 0,
+          }}
+        >
+          Edit
+        </Link>
       </Drawer>
     </div>
   );

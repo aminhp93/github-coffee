@@ -5,7 +5,8 @@ import Autocomplete from "@mui/material/Autocomplete";
 import { useMemo, useState, useCallback } from "react";
 import axios from "axios";
 
-import { useLocalStorageState } from "./useLocalStorageState";
+import { useLocalStorageState } from "@/@core/hooks/useLocalStorageState";
+import { LIST_PACKAGE_KEY } from "./utils";
 
 const CheckNpmPackage = () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -13,7 +14,7 @@ const CheckNpmPackage = () => {
   const [newPackage, setNewPackage] = useState<string>("");
   // Use the custom hook here
   const [listPackage, setListPackage] = useLocalStorageState<string[]>(
-    "listPackage",
+    LIST_PACKAGE_KEY,
     []
   );
 
