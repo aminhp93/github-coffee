@@ -1,6 +1,6 @@
 import dynamic from "next/dynamic";
 
-const CheckNpmPackage = dynamic(() => import("@/features/check-npm-package"), {
+const TableTask = dynamic(() => import("@/features/table-task"), {
   ssr: false,
 });
 
@@ -16,10 +16,10 @@ const FeatureWrapper = dynamic(
   }
 );
 
-export default function CheckNpmPackagePage() {
+export default function TableTaskPage() {
   return (
-    <FeatureWrapper featureName="1-check-npm-package">
-      <CheckNpmPackage />;
+    <FeatureWrapper featureName="2-table-task">
+      <TableTask />;
     </FeatureWrapper>
   );
 }

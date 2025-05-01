@@ -2,6 +2,7 @@ import { ReactNode, useEffect, useState } from "react";
 import { Button, Drawer } from "@mui/material";
 import matter from "gray-matter";
 import Markdown from "react-markdown";
+import Link from "next/link";
 
 const FeatureWrapper = ({
   children,
@@ -16,7 +17,6 @@ const FeatureWrapper = ({
   const [meta, setMeta] = useState<{
     title?: string;
     description?: string;
-    link?: string;
   }>({});
 
   const toggleDrawer = (newOpen: boolean) => () => {
@@ -28,6 +28,7 @@ const FeatureWrapper = ({
       .then((res) => res.text())
       .then((raw) => {
         const { data, content: mdContent } = matter(raw);
+
         setMeta(data);
         setContent(mdContent);
       });
@@ -39,11 +40,22 @@ const FeatureWrapper = ({
       {children}
       <Drawer open={open} onClose={toggleDrawer(false)}>
         <h1>{meta.title}</h1>
-        <p>{meta.description}</p>
+
         <Markdown>{content}</Markdown>
+        <Link
+          href={`https://github.com/aminhp93/github-coffee/edit/main/public/docs/features/${featureName}.md`}
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            position: "absolute",
+            bottom: 0,
+          }}
+        >
+          Edit
+        </Link>
       </Drawer>
     </div>
   );
 };
 
-export default FeatureWrapper;
+export { FeatureWrapper };
