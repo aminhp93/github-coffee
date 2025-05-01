@@ -1,0 +1,65 @@
+export const MOCK_DATA = {
+  events: [
+    // { id: 1, content: "item 1", start: "2025-04-20" },
+    // { id: 2, content: "item 2", start: "2025-04-14" },
+    // { id: 3, content: "item 3", start: "2025-04-18" },
+    // { id: 4, content: "item 4", start: "2025-04-16", end: "2025-04-19" },
+    // { id: 5, content: "item 5", start: "2025-04-25" },
+    // { id: 6, content: "item 6", start: "2025-04-27", type: "point" },
+    {
+      id: "1",
+      content: "Thị trường mở cửa năm mới với mức tăng nhẹ",
+      start: "2025-01-02",
+      type: "point",
+    },
+    {
+      id: "2",
+      content: "Vingroup chịu áp lực tài chính do VinFast thua lỗ",
+      start: "2025-01-23",
+      type: "point",
+    },
+    {
+      id: "3",
+      content: "Commonwealth Bank of Australia rút khỏi VIB",
+      start: "2025-03-05",
+      type: "point",
+    },
+    {
+      id: "4",
+      content: "Dự báo tăng trưởng GDP của Việt Nam",
+      start: "2025-03-12",
+      type: "point",
+    },
+    {
+      id: "5",
+      content: "Mỹ áp thuế 46% lên hàng hóa Việt Nam",
+      start: "2025-04-02",
+      type: "point",
+    },
+    {
+      id: "6",
+      content: "VN-Index giảm mạnh do lo ngại thuế quan",
+      start: "2025-04-03",
+      type: "point",
+    },
+    {
+      id: "7",
+      content: "Tiếp tục giảm điểm do lo ngại thuế quan",
+      start: "2025-04-08",
+      type: "point",
+    },
+    {
+      id: "8",
+      content: "Mỹ giảm thuế cho Việt Nam xuống 10%",
+      start: "2025-04-10",
+      type: "point",
+    },
+    {
+      id: "9",
+      content: "FTSE xem xét nâng hạng thị trường Việt Nam",
+      start: "2025-04-08",
+      type: "point",
+    },
+    { id: "10", content: "KRX", start: "2025-05-05", type: "point" },
+  ],
+};

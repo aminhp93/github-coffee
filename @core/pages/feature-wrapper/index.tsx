@@ -13,6 +13,7 @@ const FeatureWrapper = ({
 }) => {
   const [open, setOpen] = useState(false);
   const [content, setContent] = useState("");
+  const [error, setError] = useState<string | null>(null);
 
   const [meta, setMeta] = useState<{
     title?: string;
@@ -25,8 +26,16 @@ const FeatureWrapper = ({
 
   useEffect(() => {
     fetch(`/docs/features/${featureName}.md`)
-      .then((res) => res.text())
+      .then((res) => {
+        if (!res.ok) {
+          setError("error");
+          // throw new Error("Network response was not ok");
+          return Promise.reject("Network response was not ok");
+        }
+        return res.text();
+      })
       .then((raw) => {
+        console.log("raw", raw);
         const { data, content: mdContent } = matter(raw);
 
         setMeta(data);
@@ -38,7 +47,9 @@ const FeatureWrapper = ({
     <div>
       <Button onClick={toggleDrawer(true)}>Feature detail</Button>
       {children}
+
       <Drawer open={open} onClose={toggleDrawer(false)}>
+        {error && <div>error</div>}
         <h1>{meta.title}</h1>
 
         <Markdown>{content}</Markdown>
