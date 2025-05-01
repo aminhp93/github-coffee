@@ -1,6 +1,6 @@
 import dynamic from "next/dynamic";
 
-const CheckNpmPackage = dynamic(() => import("@/features/check-npm-package"), {
+const Evaluation = dynamic(() => import("@/features/evaluation"), {
   ssr: false,
 });
 
@@ -16,10 +16,10 @@ const FeatureWrapper = dynamic(
   }
 );
 
-export default function CheckNpmPackagePage() {
+export default function EvaluationPage() {
   return (
-    <FeatureWrapper featureName="1-check-npm-package">
-      <CheckNpmPackage />;
+    <FeatureWrapper featureName="3-evaluation">
+      <Evaluation />;
     </FeatureWrapper>
   );
 }
