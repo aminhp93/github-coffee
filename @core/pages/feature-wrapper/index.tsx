@@ -1,5 +1,6 @@
 import { ReactNode, useEffect, useState } from "react";
-import { Button, Drawer } from "@mui/material";
+import Button from "@mui/material/Button";
+import Drawer from "@mui/material/Drawer";
 import matter from "gray-matter";
 import Markdown from "react-markdown";
 import Link from "next/link";
