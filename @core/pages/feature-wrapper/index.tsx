@@ -1,9 +1,9 @@
 import { ReactNode, useEffect, useState } from "react";
 import Button from "@mui/material/Button";
 import Drawer from "@mui/material/Drawer";
-import matter from "gray-matter";
 import { Markdown } from "@/@core/utils/markdown";
 import Link from "next/link";
+import { axiosInstance } from "@/@core/services/http/axiosInstance";
 
 const FeatureWrapper = ({
   children,
@@ -26,27 +26,32 @@ const FeatureWrapper = ({
   };
 
   useEffect(() => {
-    fetch(`/docs/features/${featureName}.md`)
-      .then((res) => {
-        if (!res.ok) {
-          setError("error");
-          // throw new Error("Network response was not ok");
-          return Promise.reject("Network response was not ok");
-        }
-        return res.text();
-      })
-      .then((raw) => {
-        console.log("raw", raw);
-        const { data, content: mdContent } = matter(raw);
+    (async () => {
+      try {
+        const res = await axiosInstance({
+          method: "get",
+          url: "/api/cors",
+          params: {
+            url: `https://raw.githubusercontent.com/aminhp93/github-coffee-docs/main/docs/features/${featureName}.md`,
+          },
+          baseURL: "/",
+        });
 
-        setMeta(data);
-        setContent(mdContent);
-      });
+        setMeta(res.data.data);
+        setContent(res.data.content);
+      } catch (error) {
+        console.log("error", error);
+        setError("Error");
+      }
+    })();
   }, [featureName]);
+
+  const test = async () => {};
 
   return (
     <div>
       <Button onClick={toggleDrawer(true)}>Feature detail</Button>
+      <Button onClick={() => test()}>test</Button>
       {children}
 
       <Drawer open={open} onClose={toggleDrawer(false)}>
