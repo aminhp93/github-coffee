@@ -1,7 +1,6 @@
 import { DataSet } from "vis-timeline/standalone";
 import { useEffect, useState } from "react";
 import { keyBy } from "lodash";
-import { MOCK_DATA } from "./constants";
 import { TimelineWrapper } from "@/@core/components/timeline";
 import { ListItemWrapper } from "./ListItemWrapper";
 import { EventService } from "@/@core/services/http/event";
@@ -12,7 +11,6 @@ import { Item } from "./types";
 
 const TimelineEvent = () => {
   const [items, setItems] = useState<DataSet<Item>>(() => new DataSet<Item>());
-  new DataSet(MOCK_DATA.events);
   const [selectedId, setSelectedId] = useState<string | null>(null);
 
   useEffect(() => {
@@ -43,12 +41,12 @@ const TimelineEvent = () => {
   }, []);
 
   const handleItemClick = (props: {
-    itemId: string | null;
+    item: string | null;
     group: string | null;
     event: React.MouseEvent<HTMLElement>;
   }) => {
-    if (props.itemId) {
-      setSelectedId(props.itemId);
+    if (props.item) {
+      setSelectedId(props.item);
     } else {
       console.log("Clicked on empty space");
     }

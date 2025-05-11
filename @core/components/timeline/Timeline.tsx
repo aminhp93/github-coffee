@@ -22,7 +22,7 @@ interface Props<T extends { id: string | number }> {
   items: DataSet<T, "id">;
   options?: typeof DEFAULT_OPTIONS; // Timeline options
   onItemClick?: (data: {
-    itemId: string | null; // ID of the clicked item
+    item: string | null; // ID of the clicked item
     group: string | null; // Group of the clicked item
     event: React.MouseEvent<HTMLElement>; // Mouse event
   }) => void; // Callback for item click
