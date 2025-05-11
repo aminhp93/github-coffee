@@ -2,7 +2,7 @@ import { axiosInstance } from "../axiosInstance";
 import { Event } from "./schema";
 
 const EventUrl = {
-  list: "/api/event",
+  list: "/event",
 };
 
 export const EventService = {

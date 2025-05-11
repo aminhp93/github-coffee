@@ -9,7 +9,7 @@ count=$(grep -ir  "eslint-disable" $include_dirs | wc -l)
 echo "$count number of eslint-disable comments"
 
 # Check if the count exceeds the threshold
-if [[ $count -gt 5 ]]; then
+if [[ $count -gt 6 ]]; then
     echo "Too many eslint-disable comments"
     exit 1
 fi

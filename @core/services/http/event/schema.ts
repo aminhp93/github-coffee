@@ -5,7 +5,7 @@ export const EventItemSchema = z.object({
   name: z.string(),
   created_at: z.string(),
   datetime: z.string().optional(),
-  descriptin: z.string().optional(),
+  description: z.string().nullable(),
 });
 
 export const EventSchema = z.object({

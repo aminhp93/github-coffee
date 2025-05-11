@@ -2,7 +2,7 @@ import { ReactNode, useEffect, useState } from "react";
 import Button from "@mui/material/Button";
 import Drawer from "@mui/material/Drawer";
 import matter from "gray-matter";
-import Markdown from "react-markdown";
+import { Markdown } from "@/@core/utils/markdown";
 import Link from "next/link";
 
 const FeatureWrapper = ({

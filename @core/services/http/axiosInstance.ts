@@ -6,7 +6,7 @@ const axiosInstance = axios.create({
   paramsSerializer: {
     serialize: (params) => qs.stringify(params, { arrayFormat: "repeat" }),
   },
-  baseURL: "http://localhost:3010",
+  baseURL: "https://github-coffee-api.vercel.app/api",
 });
 
 export { axiosInstance };
