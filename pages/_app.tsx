@@ -8,8 +8,8 @@ import { NotificationProvider } from "@/@core/components/notification";
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <StyledEngineProvider injectFirst>
+      <CssBaseline />
       <NotificationProvider>
-        <CssBaseline />
         <MainLayout>
           <Component {...pageProps} />
         </MainLayout>

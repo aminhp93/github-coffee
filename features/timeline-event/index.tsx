@@ -1,5 +1,5 @@
 import { DataSet } from "vis-timeline/standalone";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { keyBy } from "lodash";
 import { TimelineWrapper } from "@/@core/components/timeline";
 import { ListItemWrapper } from "./ListItemWrapper";
@@ -25,17 +25,35 @@ const TimelineEvent = () => {
         const parsedData = EventSchema.parse(response.data);
 
         // map data
-        const mappedData = parsedData.data.map((item) => ({
-          id: item.id,
-          content: item.name,
-          start: dayjs(item.start_datetime).format("YYYY-MM-DD"),
-          extraData: {
-            description: item.description,
-          },
-          type: "point",
-        }));
+        const mappedData = parsedData.data.map((item) => {
+          const end = item.end_datetime
+            ? dayjs(item.end_datetime).format("YYYY-MM-DD")
+            : null;
 
-        setItems(new DataSet(mappedData));
+          if (end) {
+            return {
+              id: item.id,
+              content: item.name,
+              start: dayjs(item.start_datetime).format("YYYY-MM-DD"),
+              end: end,
+              extraData: {
+                description: item.description,
+              },
+            };
+          }
+          return {
+            id: item.id,
+            content: item.name,
+            start: dayjs(item.start_datetime).format("YYYY-MM-DD"),
+
+            extraData: {
+              description: item.description,
+            },
+            type: "point",
+          };
+        });
+
+        setItems(new DataSet(mappedData) as DataSet<Item>);
         setLoading(false);
         enqueueSnackbar({
           message: "Data fetched successfully",
@@ -54,19 +72,22 @@ const TimelineEvent = () => {
     fetchData();
   }, [enqueueSnackbar]);
 
-  const handleItemClick = (props: {
-    item: string | null;
-    group: string | null;
-    event: React.MouseEvent<HTMLElement>;
-  }) => {
-    if (props.item) {
-      setSelectedId(props.item);
-    } else {
-      console.log("Clicked on empty space");
-    }
-  };
+  const handleItemClick = useCallback(
+    (props: {
+      item: string | null;
+      group: string | null;
+      event: React.MouseEvent<HTMLElement>;
+    }) => {
+      if (props.item) {
+        setSelectedId(props.item);
+      } else {
+        console.log("Clicked on empty space");
+      }
+    },
+    []
+  );
 
-  const handleItemMove = (item: Item) => {
+  const handleItemMove = useCallback((item: Item) => {
     const updatedItem = {
       ...item,
       id: String(item.id),
@@ -80,7 +101,7 @@ const TimelineEvent = () => {
       updatedItems.update(updatedItem);
       return updatedItems;
     });
-  };
+  }, []);
 
   const selectedItem = selectedId ? keyBy(items.get(), "id")[selectedId] : null;
   console.log("items", items.get(), selectedItem);
@@ -92,8 +113,8 @@ const TimelineEvent = () => {
         {selectedId !== null ? (
           <>
             <p>Selected item ID: {selectedId}</p>
-            <p>Title: {selectedItem?.content}</p>
-            <p>Date: {selectedItem?.start}</p>
+            <p>Title: {selectedItem?.content as string}</p>
+            <p>Date: {selectedItem?.start as string}</p>
             <p>
               Description:
               <Markdown>{selectedItem?.extraData?.description}</Markdown>

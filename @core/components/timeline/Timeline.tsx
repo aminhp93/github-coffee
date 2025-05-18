@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { Timeline } from "vis-timeline/standalone";
 import "vis-timeline/styles/vis-timeline-graph2d.min.css";
 import type { DataItemCollectionType, DataSet } from "vis-timeline/standalone";
+import Box from "@mui/material/Box";
 
 export const DEFAULT_OPTIONS: {
   editable: boolean;
@@ -15,7 +16,7 @@ export const DEFAULT_OPTIONS: {
     const oneDay = 24 * 60 * 60 * 1000; // 1 day in milliseconds
     return Math.round(date.getTime() / oneDay) * oneDay;
   },
-  showMajorLabels: true,
+  showMajorLabels: false,
 };
 
 interface Props<T extends { id: string | number }> {
@@ -64,7 +65,20 @@ const TimelineWrapper = <T extends { id: string | number }>({
     return () => timeline.destroy();
   }, [options, onItemClick, onItemMove, items]);
 
-  return <div ref={timelineRef} style={{ height: "300px" }} />;
+  return (
+    <Box
+      ref={timelineRef}
+      sx={{
+        height: "300px",
+        ".vis-item .vis-item-overflow": {
+          overflow: "visible",
+        },
+        ".vis-item": {
+          borderWidth: 0,
+        },
+      }}
+    />
+  );
 };
 
 export { TimelineWrapper };

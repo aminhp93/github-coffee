@@ -1,9 +1,7 @@
-export interface Item {
-  id: string;
-  content: string;
-  start: string;
-  extraData: {
+import { TimelineItem } from "vis-timeline/standalone";
+
+export interface Item extends TimelineItem {
+  extraData?: {
     description: string | null;
   };
-  type: string;
 }
