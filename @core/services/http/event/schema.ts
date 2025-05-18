@@ -4,7 +4,8 @@ export const EventItemSchema = z.object({
   id: z.string(),
   name: z.string(),
   created_at: z.string(),
-  datetime: z.string().optional(),
+  start_datetime: z.string(),
+  end_datetime: z.string().nullable().optional(),
   description: z.string().nullable(),
 });
 

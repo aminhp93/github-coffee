@@ -8,15 +8,19 @@ import { EventSchema } from "@/@core/services/http/event/schema";
 import { Markdown } from "@/@core/utils/markdown";
 import { dayjs } from "@/@core/utils/datetime";
 import { Item } from "./types";
+import { useSnackbar } from "@/@core/components/notification";
 
 const TimelineEvent = () => {
   const [items, setItems] = useState<DataSet<Item>>(() => new DataSet<Item>());
   const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+  const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
     // Fetch data from the server when the component mounts
     const fetchData = async () => {
       try {
+        setLoading(true);
         const response = await EventService.list();
         const parsedData = EventSchema.parse(response.data);
 
@@ -24,7 +28,7 @@ const TimelineEvent = () => {
         const mappedData = parsedData.data.map((item) => ({
           id: item.id,
           content: item.name,
-          start: dayjs(item.datetime).format("YYYY-MM-DD"),
+          start: dayjs(item.start_datetime).format("YYYY-MM-DD"),
           extraData: {
             description: item.description,
           },
@@ -32,13 +36,23 @@ const TimelineEvent = () => {
         }));
 
         setItems(new DataSet(mappedData));
+        setLoading(false);
+        enqueueSnackbar({
+          message: "Data fetched successfully",
+          variant: "success",
+        });
       } catch (error) {
+        setLoading(false);
+        enqueueSnackbar({
+          message: "Error fetching data",
+          variant: "error",
+        });
         console.error("Error fetching data:", error);
       }
     };
 
     fetchData();
-  }, []);
+  }, [enqueueSnackbar]);
 
   const handleItemClick = (props: {
     item: string | null;
@@ -89,11 +103,15 @@ const TimelineEvent = () => {
           <p>No item selected</p>
         )}
       </div>
-      <TimelineWrapper
-        items={items as DataSet<Item>}
-        onItemClick={handleItemClick}
-        onItemMove={handleItemMove}
-      />
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
+        <TimelineWrapper
+          items={items as DataSet<Item>}
+          onItemClick={handleItemClick}
+          onItemMove={handleItemMove}
+        />
+      )}
     </div>
   );
 };
