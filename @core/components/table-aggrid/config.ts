@@ -2,7 +2,7 @@ export const DEFAULT_PROPS = {
   rowNumbers: false,
   alwaysMultiSort: true,
   pagination: true,
-  paginationPageSize: 10,
+  paginationPageSize: 20,
   paginationPageSizeSelector: [5, 10, 20],
   rowDragManaged: false,
   masterDetail: false,
