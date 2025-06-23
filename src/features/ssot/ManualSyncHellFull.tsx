@@ -16,26 +16,26 @@ export default function ManualSyncHellFull(props: Props) {
     setData(props.listData);
   }, [props.listData]);
 
-  // 🔥 Sync all dependent states MANUALLY when data changes
-  useEffect(() => {
-    // Remap selected items
-    setSelectedItems(
-      (prev) =>
-        prev
-          .map((sel) => data.find((d) => d.id === sel.id))
-          .filter(Boolean) as Item[]
-    );
+  // // 🔥 Sync all dependent states MANUALLY when data changes
+  // useEffect(() => {
+  //   // Remap selected items
+  //   setSelectedItems(
+  //     (prev) =>
+  //       prev
+  //         .map((sel) => data.find((d) => d.id === sel.id))
+  //         .filter(Boolean) as Item[]
+  //   );
 
-    // Remap highlight item
-    setHighlightItem((prev) =>
-      prev ? (data.find((d) => d.id === prev.id) ?? null) : null
-    );
+  //   // Remap highlight item
+  //   setHighlightItem((prev) =>
+  //     prev ? (data.find((d) => d.id === prev.id) ?? null) : null
+  //   );
 
-    // Remap filtered items
-    setFilteredItems(() => {
-      return filterRole ? data.filter((d) => d.role === filterRole) : data;
-    });
-  }, [data, filterRole]);
+  //   // Remap filtered items
+  //   setFilteredItems(() => {
+  //     return filterRole ? data.filter((d) => d.role === filterRole) : data;
+  //   });
+  // }, [data, filterRole]);
 
   // 🔥 Filter logic must be duplicated manually
   useEffect(() => {
