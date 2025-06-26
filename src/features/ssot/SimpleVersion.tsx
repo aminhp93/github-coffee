@@ -5,18 +5,17 @@ interface Props {
   listData: Item[];
 }
 export default function ManualSyncHellFull(props: Props) {
-
   const [filterRole, setFilterRole] = useState<string | null>(null);
 
   const [selectedItems, setSelectedItems] = useState<Item[]>([]);
   const [filteredItems, setFilteredItems] = useState<Item[]>(props.listData); // 🔥 manually synced!
 
-
-
   // 🔥 Filter logic must be duplicated manually
   useEffect(() => {
     setFilteredItems(() =>
-      filterRole ? props.listData.filter((d) => d.role === filterRole) : props.listData
+      filterRole
+        ? props.listData.filter((d) => d.role === filterRole)
+        : props.listData
     );
   }, [props.listData, filterRole]);
 
@@ -37,8 +36,6 @@ export default function ManualSyncHellFull(props: Props) {
         <button onClick={() => setFilterRole('QA')}>QA</button>
       </div>
 
- 
-
       <ul>
         {filteredItems.map((item) => (
           <li
@@ -51,8 +48,7 @@ export default function ManualSyncHellFull(props: Props) {
               border: '1px solid #ccc',
               backgroundColor: selectedItems.some((s) => s.id === item.id)
                 ? '#bbdefb'
-                
-                  : '#fff',
+                : '#fff',
             }}
           >
             {item.name} - {item.role}
@@ -67,7 +63,7 @@ export default function ManualSyncHellFull(props: Props) {
             ? selectedItems.map((i) => i.name).join(', ')
             : 'None'}
         </p>
-       
+
         <p>
           🔎 <strong>Filtered Items:</strong>{' '}
           {filteredItems.map((i) => i.name).join(', ') || 'Empty'}

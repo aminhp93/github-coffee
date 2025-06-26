@@ -14,7 +14,6 @@ interface TabPanelProps {
   value: number;
 }
 
-
 function a11yProps(index: number) {
   return {
     id: `simple-tab-${index}`,
@@ -49,7 +48,7 @@ function SSOT() {
   return (
     <Box>
       <h1>Single Source of Truth</h1>
-      <div style={{ paddingLeft: 20, position: "fixed", bottom: 0 }}>
+      <div style={{ paddingLeft: 20, position: 'fixed', bottom: 0 }}>
         <strong>Data Action:</strong>{' '}
         <button
           onClick={() => {
@@ -94,23 +93,26 @@ function SSOT() {
           reset
         </button>
       </div>
-      
 
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          aria-label="basic tabs example"
+        >
           <Tab label="Simple Version" {...a11yProps(0)} />
           <Tab label="Complex Version" {...a11yProps(1)} />
           <Tab label="Working Version" {...a11yProps(2)} />
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
-      <SimpleVersion listData={listData} />
+        <SimpleVersion listData={listData} />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-      <ManualSyncHellFull listData={listData} />
+        <ManualSyncHellFull listData={listData} />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={2}>
-      <SSOTListSingleState listData={listData} />
+        <SSOTListSingleState listData={listData} />
       </CustomTabPanel>
     </Box>
   );
