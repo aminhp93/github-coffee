@@ -6,6 +6,7 @@ import Part2ABrokenList from './Part2ABrokenList';
 import Part3AnExplosionPain from './Part3AnExplosionPain';
 import Part4ManuallySyncFix from './Part4ManuallySyncFix';
 import Part5SSOTGroupState from './Part5SSOTGroupState';
+import Part6AntiUIDataPattern from './Part6AntiUIDataPattern';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -74,7 +75,7 @@ function SSOT() {
           <Part5SSOTGroupState />
         </CustomTabPanel>
         <CustomTabPanel value={value} index={4}>
-          Part 6: Anti-Pattern - UI Flags in Data
+          <Part6AntiUIDataPattern />
         </CustomTabPanel>
         <CustomTabPanel value={value} index={5}>
           Part 8: Real-World - MUI DataGrid Does It Right

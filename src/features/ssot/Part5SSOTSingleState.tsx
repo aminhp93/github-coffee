@@ -3,24 +3,25 @@ import { type Item } from './utils';
 import { DATA } from './utils';
 
 export default function SSOTSingleState() {
+  // ✅ 1. Data is the single source of truth
   const [data, setData] = useState<Item[]>(DATA);
 
-  // ✅ Only minimal UI state
+  // ✅ 2. Minimal UI state — no derived data stored
   const [filterRole, setFilterRole] = useState<string | null>(null);
   const [selectedIds, setSelectedIds] = useState<number[]>([]);
   const [highlightId, setHighlightId] = useState<number | null>(null);
 
-  // ✅ Derived: filtered items (based on role)
+  // ✅ 3. Derived view — filteredItems
   const filteredItems = useMemo(() => {
     return filterRole ? data.filter((item) => item.role === filterRole) : data;
   }, [data, filterRole]);
 
-  // ✅ Derived: selected items that still exist
+  // ✅ 4. Derived: selected items that still exist
   const selectedItems = useMemo(() => {
     return data.filter((item) => selectedIds.includes(item.id));
   }, [data, selectedIds]);
 
-  // ✅ Derived: highlight item (if exists)
+  // ✅ 5. Derived view — highlighted item if it still exists
   const highlightItem = useMemo(() => {
     return data.find((item) => item.id === highlightId) || null;
   }, [data, highlightId]);

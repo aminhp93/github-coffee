@@ -1,38 +1,37 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { type Item } from './utils';
 import { DATA } from './utils';
 
 export default function ManualSyncHellPart3() {
   const [data, setData] = useState<Item[]>(DATA);
-  const [filterRole, setFilterRole] = useState<string | null>(null);
-  const [filteredItems, setFilteredItems] = useState<Item[]>(data);
-
+  const [, setFilterRole] = useState<string | null>(null);
+  const [filteredItems] = useState<Item[]>(data);
   const [selectedItems, setSelectedItems] = useState<Item[]>([]); // ❌ manually managed
   const [highlightItem, setHighlightItem] = useState<Item | null>(null); // ❌ manually managed
 
   // 🔥 Filter logic must be synced manually
-  useEffect(() => {
-    setFilteredItems(
-      filterRole ? data.filter((item) => item.role === filterRole) : data
-    );
-  }, [data, filterRole]);
+  // useEffect(() => {
+  //   setFilteredItems(
+  //     filterRole ? data.filter((item) => item.role === filterRole) : data
+  //   );
+  // }, [data, filterRole]);
 
   // 🔥 Selected items must be revalidated manually
-  useEffect(() => {
-    setSelectedItems(
-      (prev) =>
-        prev
-          .map((sel) => data.find((d) => d.id === sel.id))
-          .filter(Boolean) as Item[]
-    );
-  }, [data]);
+  // useEffect(() => {
+  //   setSelectedItems(
+  //     (prev) =>
+  //       prev
+  //         .map((sel) => data.find((d) => d.id === sel.id))
+  //         .filter(Boolean) as Item[]
+  //   );
+  // }, [data]);
 
   // 🔥 Highlight must also be checked manually
-  useEffect(() => {
-    setHighlightItem((prev) =>
-      prev && data.some((d) => d.id === prev.id) ? prev : null
-    );
-  }, [data]);
+  // useEffect(() => {
+  //   setHighlightItem((prev) =>
+  //     prev && data.some((d) => d.id === prev.id) ? prev : null
+  //   );
+  // }, [data]);
 
   const toggleSelect = (item: Item) => {
     setSelectedItems((prev) =>
@@ -55,6 +54,11 @@ export default function ManualSyncHellPart3() {
     setData((prev) => [...prev, { id: nextId, name: 'Eve', role: 'QA' }]);
   };
 
+  const highlightAlice = () => {
+    const alice = data.find((item) => item.name === 'Alice');
+    if (alice) setHighlightItem(alice);
+  };
+
   return (
     <div style={{ padding: 20 }}>
       <h2>💥 Manual Sync Explosion: Filter + Select + Highlight + Dynamic</h2>
@@ -67,8 +71,9 @@ export default function ManualSyncHellPart3() {
       </div>
 
       <div style={{ marginBottom: 12 }}>
-        <button onClick={removeAlice}>🗑️ Remove Alice</button>
+        <button onClick={highlightAlice}>🌟 Highlight Alice</button>
         <button onClick={addEve}>➕ Add Eve</button>
+        <button onClick={removeAlice}>🗑️ Remove Alice</button>
       </div>
 
       <ul>

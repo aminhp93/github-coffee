@@ -62,6 +62,11 @@ export default function SSOTSolution() {
     setData((prev) => [...prev, { id: nextId, name: 'Eve', role: 'QA' }]);
   };
 
+  const highlightAlice = () => {
+    const alice = data.find((item) => item.name === 'Alice');
+    if (alice) setHighlight(alice);
+  };
+
   return (
     <div style={{ padding: 20 }}>
       <h2>✅ SSOT — Derived, Not Duplicated</h2>
@@ -74,8 +79,9 @@ export default function SSOTSolution() {
       </div>
 
       <div style={{ marginBottom: 12 }}>
-        <button onClick={removeAlice}>🗑️ Remove Alice</button>
+        <button onClick={highlightAlice}>🌟 Highlight Alice</button>
         <button onClick={addEve}>➕ Add Eve</button>
+        <button onClick={removeAlice}>🗑️ Remove Alice</button>
       </div>
 
       <ul>

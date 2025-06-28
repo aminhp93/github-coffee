@@ -4,11 +4,8 @@ import { DATA } from './utils';
 
 export default function ManualSyncFix() {
   const [data, setData] = useState<Item[]>(DATA);
-
-  // ✅ UI State
   const [filterRole, setFilterRole] = useState<string | null>(null);
   const [filteredItems, setFilteredItems] = useState<Item[]>(data);
-
   const [selectedItems, setSelectedItems] = useState<Item[]>([]);
   const [highlightItem, setHighlightItem] = useState<Item | null>(null);
 
@@ -57,6 +54,11 @@ export default function ManualSyncFix() {
     setData((prev) => [...prev, { id: nextId, name: 'Eve', role: 'QA' }]);
   };
 
+  const highlightAlice = () => {
+    const alice = data.find((item) => item.name === 'Alice');
+    if (alice) setHighlightItem(alice);
+  };
+
   return (
     <div style={{ padding: 20 }}>
       <h2>🛠️ Manual Sync Fix — Works, But Still Fragile</h2>
@@ -69,8 +71,9 @@ export default function ManualSyncFix() {
       </div>
 
       <div style={{ marginBottom: 12 }}>
-        <button onClick={removeAlice}>🗑️ Remove Alice</button>
+        <button onClick={highlightAlice}>🌟 Highlight Alice</button>
         <button onClick={addEve}>➕ Add Eve</button>
+        <button onClick={removeAlice}>🗑️ Remove Alice</button>
       </div>
 
       <ul>
