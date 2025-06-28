@@ -7,6 +7,7 @@ import Part3AnExplosionPain from './Part3AnExplosionPain';
 import Part4ManuallySyncFix from './Part4ManuallySyncFix';
 import Part5SSOTGroupState from './Part5SSOTGroupState';
 import Part6AntiUIDataPattern from './Part6AntiUIDataPattern';
+import Part8RealWorldMUIDataGrid from './Part8RealWorldMUIDataGrid';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -78,7 +79,7 @@ function SSOT() {
           <Part6AntiUIDataPattern />
         </CustomTabPanel>
         <CustomTabPanel value={value} index={5}>
-          Part 8: Real-World - MUI DataGrid Does It Right
+          <Part8RealWorldMUIDataGrid />
         </CustomTabPanel>
       </Box>
     </Box>

@@ -5,7 +5,7 @@ import { DATA } from './utils';
 interface ItemWithUIData extends Item {
   isSelected: boolean;
   isHighlighted: boolean;
-  isFiltered: boolean; // 👈 UI flag for visibilit
+  isFiltered: boolean; // 👈 UI flag for visibility
 }
 
 export default function AntiPatternUIFlagsInData() {

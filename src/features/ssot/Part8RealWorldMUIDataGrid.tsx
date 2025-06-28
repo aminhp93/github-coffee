@@ -9,18 +9,14 @@ import {
   useGridApiRef,
 } from '@mui/x-data-grid';
 import Box from '@mui/material/Box';
-import { COLUMNS, type Item } from './utils';
+import { COLUMNS, DATA } from './utils';
 
-interface Props {
-  listData: Item[];
-}
-
-function CleanGrid(props: Props) {
+export default function Part8RealWorldMUIDataGrid() {
   // Hooks
   const apiRef = useGridApiRef();
 
   // data state
-  const [rows, setRows] = useState(props.listData);
+  const [rows] = useState(DATA);
 
   // ui state
   const [rowSelectionModel, setRowSelectionModel] =
@@ -30,10 +26,6 @@ function CleanGrid(props: Props) {
     logicOperator: GridLogicOperator.And,
   });
   const [filterIds, setFilterIds] = useState<Set<GridRowId>>(new Set());
-
-  useEffect(() => {
-    setRows(props.listData);
-  }, [props.listData]);
 
   const onFilterModelChange = useCallback<
     NonNullable<DataGridProps['onFilterModelChange']>
@@ -63,7 +55,7 @@ function CleanGrid(props: Props) {
     <Box sx={{ height: 400 }}>
       <DataGrid
         apiRef={apiRef}
-        rows={rows}
+        rows={DATA}
         columns={COLUMNS}
         rowHeight={40}
         checkboxSelection
@@ -92,5 +84,3 @@ function CleanGrid(props: Props) {
     </Box>
   );
 }
-
-export default CleanGrid;
