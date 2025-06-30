@@ -1,19 +1,19 @@
-import { DATA } from './utils';
 import { useState } from 'react';
-import SimpleVersion from './SimpleVersion';
-
-import ManualSyncHellFull from './ManualSyncHellFull';
-import SSOTListSingleState from './SSOTListSingleState';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
+import Part2ABrokenList from './Part2ABrokenList';
+import Part3AnExplosionPain from './Part3AnExplosionPain';
+import Part4ManuallySyncFix from './Part4ManuallySyncFix';
+import Part5SSOTGroupState from './Part5SSOTGroupState';
+import Part6AntiUIDataPattern from './Part6AntiUIDataPattern';
+import Part8RealWorldMUIDataGrid from './Part8RealWorldMUIDataGrid';
 
 interface TabPanelProps {
   children?: React.ReactNode;
   index: number;
   value: number;
 }
-
 
 function a11yProps(index: number) {
   return {
@@ -33,13 +33,12 @@ function CustomTabPanel(props: TabPanelProps) {
       aria-labelledby={`simple-tab-${index}`}
       {...other}
     >
-      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
+      {value === index && <Box>{children}</Box>}
     </div>
   );
 }
 
 function SSOT() {
-  const [listData, setListData] = useState(DATA);
   const [value, setValue] = useState(0);
 
   const handleChange = (_: React.SyntheticEvent, newValue: number) => {
@@ -47,71 +46,42 @@ function SSOT() {
   };
 
   return (
-    <Box>
-      <h1>Single Source of Truth</h1>
-      <div style={{ paddingLeft: 20, position: "fixed", bottom: 0 }}>
-        <strong>Data Action:</strong>{' '}
-        <button
-          onClick={() => {
-            setListData(listData.filter((i) => i.id !== 1));
-          }}
-        >
-          delete row 1
-        </button>
-        <button
-          onClick={() => {
-            setListData(listData.filter((i) => i.id !== 2));
-          }}
-        >
-          delete row 2
-        </button>
-        <button
-          onClick={() => {
-            setListData(listData.filter((i) => i.id !== 3));
-          }}
-        >
-          delete row 3
-        </button>
-        <button
-          onClick={() => {
-            setListData(listData.filter((i) => i.id !== 4));
-          }}
-        >
-          delete row 4
-        </button>
-        <button
-          onClick={() => {
-            setListData(listData.filter((i) => i.id !== 5));
-          }}
-        >
-          delete row 5
-        </button>
-        <button
-          onClick={() => {
-            setListData(DATA);
-          }}
-        >
-          reset
-        </button>
-      </div>
-      
-
-      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-          <Tab label="Simple Version" {...a11yProps(0)} />
-          <Tab label="Complex Version" {...a11yProps(1)} />
-          <Tab label="Working Version" {...a11yProps(2)} />
-        </Tabs>
+    <Box sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+      <h2>Single Source of Truth</h2>
+      <Box sx={{ flex: 1 }}>
+        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            aria-label="basic tabs example"
+          >
+            <Tab label="Part 2" {...a11yProps(0)} />
+            <Tab label="Part 3" {...a11yProps(1)} />
+            <Tab label="Part 4" {...a11yProps(2)} />
+            <Tab label="Part 5" {...a11yProps(3)} />
+            <Tab label="Part 6" {...a11yProps(4)} />
+            <Tab label="Part 8" {...a11yProps(5)} />
+          </Tabs>
+        </Box>
+        <CustomTabPanel value={value} index={0}>
+          <Part2ABrokenList />
+        </CustomTabPanel>
+        <CustomTabPanel value={value} index={1}>
+          <Part3AnExplosionPain />
+        </CustomTabPanel>
+        <CustomTabPanel value={value} index={2}>
+          <Part4ManuallySyncFix />
+        </CustomTabPanel>
+        <CustomTabPanel value={value} index={3}>
+          <Part5SSOTGroupState />
+        </CustomTabPanel>
+        <CustomTabPanel value={value} index={4}>
+          <Part6AntiUIDataPattern />
+        </CustomTabPanel>
+        <CustomTabPanel value={value} index={5}>
+          <Part8RealWorldMUIDataGrid />
+        </CustomTabPanel>
       </Box>
-      <CustomTabPanel value={value} index={0}>
-      <SimpleVersion listData={listData} />
-      </CustomTabPanel>
-      <CustomTabPanel value={value} index={1}>
-      <ManualSyncHellFull listData={listData} />
-      </CustomTabPanel>
-      <CustomTabPanel value={value} index={2}>
-      <SSOTListSingleState listData={listData} />
-      </CustomTabPanel>
     </Box>
   );
 }

@@ -17,7 +17,9 @@
     "@mui/material": "^7.1.1",
     "@mui/x-data-grid": "^8.5.2",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "react-router": "^7.6.2",
+    "sum-utils": "workspace:*"
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",
