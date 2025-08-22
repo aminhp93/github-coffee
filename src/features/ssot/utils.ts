@@ -17,3 +17,10 @@ export const COLUMNS = [
   { field: 'name', headerName: 'Name', width: 130 },
   { field: 'role', headerName: 'Role', width: 100 },
 ];
+
+
+export const somethingToremove = () => {
+  // This function is no longer needed
+  // It can be safely removed
+  console.log('This function is obsolete');
+}
